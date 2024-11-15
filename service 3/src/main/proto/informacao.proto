@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option java_package = "com.exemplo.servicoc.grpc";
+option java_outer_classname = "InformacaoServiceProto";
+
+service InformacaoService {
+    rpc GetInformacao (InformacaoRequest) returns (InformacaoResponse);
+    rpc CreateInformacao (InformacaoCreateRequest) returns (InformacaoResponse);
+}
+
+message InformacaoRequest {
+    int64 id = 1;
+}
+
+message InformacaoResponse {
+    int64 id = 1;
+    string data = 2;
+}
+
+message InformacaoCreateRequest {
+    string data = 1;
+}

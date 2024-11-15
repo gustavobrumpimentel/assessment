@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: servico-a
+  name: servico-a
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: servico-a
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: servico-a
+    spec:
+      containers:
+      - image: servico-a
+        name: servico-a
+        imagePullPolicy: Never 
+        resources: {}
+status: {}

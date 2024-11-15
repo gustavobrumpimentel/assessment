@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: servico-b
+  labels:
+    app: servico-b
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: servico-b
+  template:
+    metadata:
+      labels:
+        app: servico-b
+    spec:
+      containers:
+      - name: servico-b
+        image: servico-b:latest # Imagem Docker do serviço B
+        ports:
+        - containerPort: 6565
+        env:
+        - name: SPRING_DATASOURCE_URL
+          value: "jdbc:postgresql://db-servico-b:5432/servico_b_db"
+        - name: SPRING_DATASOURCE_USERNAME
+          value: "user"
+        - name: SPRING_DATASOURCE_PASSWORD
+          value: "password"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: servico-b
+spec:
+  selector:
+    app: servico-b
+  ports:
+  - protocol: TCP
+    port: 6565
+    targetPort: 6565
+  type: ClusterIP
